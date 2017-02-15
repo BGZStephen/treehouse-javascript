@@ -7,6 +7,17 @@ const addItemInput = document.querySelector(`.addItemInput`)
 const addItemButton = document.querySelector(`.addItemButton`)
 const removeItemButton = document.querySelector(`.removeItemButton`)
 
+listDiv.addEventListener(`mouseover`, (event) => {
+    if(event.target.tagName == `LI`) {
+      event.target.textContent = event.target.textContent.toUpperCase();
+    }
+  })
+listDiv.addEventListener(`mouseout`, (event) => {
+  if(event.target.tagName == `LI`) {
+      event.target.textContent = event.target.textContent.toLowerCase();
+    }
+  })
+
 toggleList.addEventListener(`click`, () => {
   if(listDiv.style.display == 'none') {
     listDiv.style.display = `block`;
