@@ -23,14 +23,17 @@ document.addEventListener(`DOMContentLoaded`, () => {
         let li = lis[i];
         if(li.className === `responded`) {
           li.style.display = ``;
+          li.querySelector(`label`).style.display = `none`
         } else {
           li.style.display = `none`;
+          li.querySelector(`label`).style.display = ``
         }
       }
     } else {
       for(let i = 0; i < lis.length; i+= 1) {
         let li = lis[i];
         li.style.display = ``;
+        li.querySelector(`label`).style.display = ``
       }
     }
   })
@@ -55,7 +58,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
     const li = document.createElement(`li`);
     appendToLi(`span`, `textContent`, text);
-    appendToLi(`label`, `textContent`, `Confirmed`).appendChild(createElement(`input`, `type`, `checkbox` ));
+    appendToLi(`label`, `textContent`, `awaiting response`).appendChild(createElement(`input`, `type`, `checkbox` ));
     appendToLi(`button`, `textContent`, `edit`);
     appendToLi(`button`, `textContent`, `remove`);
     return li;
@@ -64,20 +67,27 @@ document.addEventListener(`DOMContentLoaded`, () => {
   form.addEventListener(`submit`, (e) => {
     e.preventDefault();
     const text = input.value;
-    const li = createLi(text) // send text to createLi function
-    ul.appendChild(li);
-    input.value = ``;
+    if(text == ``){
+        alert(`Please enter a guest name.`)
+    } else {
+      const li = createLi(text) // send text to createLi function
+      ul.appendChild(li);
+      input.value = ``;
+    }
   })
 
   ul.addEventListener(`change`, (e) => {
     const checkbox = event.target;
     const checked = checkbox.checked;
     const li = checkbox.parentNode.parentNode;
+    let responseText = checkbox.parentNode.firstChild;
 
     if(checked) {
       li.className=`responded`
+      responseText.textContent = `responded`
     } else {
       li.className=``
+      responseText.textContent = `awaiting response`
     }
   })
 
