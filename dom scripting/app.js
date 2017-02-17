@@ -38,12 +38,15 @@ document.addEventListener(`DOMContentLoaded`, () => {
   // function to build the LI based on the text information provided on the submit event listener
 
   const createLi = (text) => {
+    // creates the element to be appended, accepts 3 values, the element name, property to be amended and the value to be assigned to the property
     const createElement = (elementName, property, value) => {
       const element = document.createElement(elementName);
       element[property] = value;
       return element;
     }
-
+    // sets element to the output of the createElement function, passing in the elementName, propert and value
+    // then, append the element to the li as a child
+    // return element for use on appending checkbox to label
     const appendToLi = (elementName, property, value) => {
       const element = createElement(elementName, property, value);
       li.appendChild(element);
@@ -83,24 +86,33 @@ document.addEventListener(`DOMContentLoaded`, () => {
       const button = e.target;
       const li = button.parentNode;
       const ul = li.parentNode;
-      if(button.textContent == `remove`) {
-        ul.removeChild(li);
-      } else if(button.textContent == `edit`) {
-        const span = li.firstElementChild;
-        const input = document.createElement(`input`)
-        input.type = `text`
-        input.value = span.textContent;
-        li.insertBefore(input, span);
-        li.removeChild(span);
-        button.textContent = `save`;
-      } else if (button.textContent == `save`) {
-        const input = li.firstElementChild;
-        const span = document.createElement(`span`)
-        span.textContent = input.value;
-        li.insertBefore(span, input);
-        li.removeChild(input);
-        button.textContent = `edit`;
+      const action = button.textContent;
+
+      const nameActions = {
+        remove: () => {
+          ul.removeChild(li);
+        },
+        edit: () => {
+          const span = li.firstElementChild;
+          const input = document.createElement(`input`)
+          input.type = `text`
+          input.value = span.textContent;
+          li.insertBefore(input, span);
+          li.removeChild(span);
+          button.textContent = `save`;
+        },
+        save: () => {
+          const input = li.firstElementChild;
+          const span = document.createElement(`span`)
+          span.textContent = input.value;
+          li.insertBefore(span, input);
+          li.removeChild(input);
+          button.textContent = `edit`;
+        }
       }
+
+      // select and run action in buttons name
+      nameActions[action]();
     }
   })
 
