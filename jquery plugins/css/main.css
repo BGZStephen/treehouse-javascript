@@ -353,10 +353,15 @@ header {
 
 .is-sticky .header {
   background-color: black;
+  z-index: 10 !important;
 }
 
 .is-sticky .work {
   background-color: white;
   padding: 12px;
   margin: 0;
+}
+
+.slides {
+  z-index: 5;
 }
