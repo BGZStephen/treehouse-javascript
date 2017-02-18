@@ -20,6 +20,17 @@ $(`#add-pet`).on(`click`, () => {
   );
 
   $(`#posted-pets`).append($newPet)
+
+  // make the x close the window it appears in. 
+  $(`.close`).on(`click`, function() {
+    $(this).parent().remove()
+  })
+
+  // reset form fields
+
+  $name.val(``);
+  $species.val(``);
+  $notes.val()``;
 })
 
 // images fade in
