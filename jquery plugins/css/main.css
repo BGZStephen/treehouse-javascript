@@ -345,3 +345,18 @@ footer {
 header {
   background-color: white;
 }
+
+.header {
+  background-color: white;
+  transition: 1s;
+}
+
+.is-sticky .header {
+  background-color: black;
+}
+
+.is-sticky .work {
+  background-color: white;
+  padding: 12px;
+  margin: 0;
+}
